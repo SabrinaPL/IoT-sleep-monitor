@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"name": "IoT-sleep-monitor",
+			"path": "."
+		}
+	],
+	"settings": {
+		"python.languageServer": "Pylance"
+	}
+}
