@@ -1,13 +1,17 @@
 from sensor_modules.temp_sensor import *
 from sensor_modules.light_sensor import *
 
-temp_sensor = TemperatureSensor()
 light_sensor = LightSensor()
+temp_sensor = TemperatureSensor()
 
-# Add button to start the sensors, then a while loop to keep them running as long as the button is toggled on
+print("Starting sensor measurements...")
+
+while True:
+    light_sensor.measure_light()
+    temp_sensor.measure_temp()
+    temp_sensor.measure_humidity()
+    time.sleep(5)
 
 
-temp_sensor.measure_temp()
-light_sensor.measure_light()
 
 

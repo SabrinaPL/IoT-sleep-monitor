@@ -10,7 +10,7 @@ class LightSensor:
         # Initialize yellow LED
         self.yellow_led = machine.Pin(1, machine.Pin.OUT)
         
-        self.dark_threshold = 1000  # Threshold for dark environment
+        self.dark_threshold = 1200  # Threshold for dark environment
         
         # Set initial state of the LED
         self.yellow_led.off()
@@ -21,11 +21,11 @@ class LightSensor:
             print("Light Level:", light_level)
             time.sleep(0.5)
             
-            if light_level < self.dark_threshold:
-                print("It's dark, you can sleep well.")
+            if light_level > self.dark_threshold:
+                print("The room is dark enough for good sleep.")
                 self.yellow_led.off()
             else:
-                print("It's bright, you might want to dim the lights for optimal sleep.")
+                print("It's too bright, you might want to dim the lights for optimal sleep.")
                 self.yellow_led.on()
                 time.sleep(2)
                 self.yellow_led.off()
