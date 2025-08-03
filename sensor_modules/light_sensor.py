@@ -10,10 +10,12 @@ class LightSensor:
         # Initialize yellow LED
         self.yellow_led = machine.Pin(1, machine.Pin.OUT)
         
-        self.dark_threshold = 1200  # Threshold for dark environment
+        self.dark_threshold = 1400  # Threshold for dark environment
         
         # Set initial state of the LED
         self.yellow_led.off()
+        
+        print("Light sensor initialized on Pin 26")
         
     def measure_light(self):
         try:
@@ -29,6 +31,9 @@ class LightSensor:
                 self.yellow_led.on()
                 time.sleep(2)
                 self.yellow_led.off()
+            
+            return light_level 
 
         except OSError as e:
             print("Failed to read from light sensor:", e)
+            return None  # Return None if reading fails
