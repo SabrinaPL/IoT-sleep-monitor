@@ -6,7 +6,7 @@ from time import sleep
 def connect():
     wlan = network.WLAN(network.STA_IF)         # Put modem on Station mode
     if not wlan.isconnected():                  # Check if already connected
-        print('connecting to network...')
+        print('Connecting to network...')
         wlan.active(True)                       # Activate network interface
         # set power mode to get WiFi power-saving off (if needed)
         wlan.config(pm = 0xa11140)

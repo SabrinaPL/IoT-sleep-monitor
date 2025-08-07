@@ -1,6 +1,7 @@
 from sensor_modules.temp_sensor import TemperatureSensor
 from sensor_modules.light_sensor import LightSensor
 from connectivity import wifi_connection as wifi, mqtt_connection as mqtt
+from data_analysis.sleep_score_calculator import SleepScoreCalculator
 import keys
 import time
 
@@ -31,8 +32,15 @@ print("Starting sensor measurements...")
 
 while True:
     light = light_sensor.measure_light()
+    time.sleep(1.5)
     temperature = temp_sensor.measure_temp()
+    time.sleep(1.5)
     humidity = temp_sensor.measure_humidity()
+    time.sleep(1.5)
+
+    # Calculate sleep score
+    sleep_score = SleepScoreCalculator(temperature, humidity, light).calculate_sleep_score()
+    print("Current sleep score:", sleep_score)
 
     # Send data to Adafruit IO only if all readings are successful
     if light is not None and temperature is not None and humidity is not None:
@@ -40,6 +48,7 @@ while True:
             mqtt_client.publish(keys.AIO_LIGHTS_FEED, str(light))
             mqtt_client.publish(keys.AIO_TEMPERATURE_FEED, str(temperature))
             mqtt_client.publish(keys.AIO_HUMIDITY_FEED, str(humidity))
+            mqtt_client.publish(keys.AIO_SLEEP_SCORE_FEED, str(sleep_score))
             print("Data sent to Adafruit IO successfully!")
         except Exception as e:
             print("Failed to send data to Adafruit IO:", e)
