@@ -170,6 +170,8 @@ The data is transmitted from the Raspberry Pi Pico W to Adafruit IO using the MQ
 
 *Adafruit IO dashboard showing real-time sensor data and sleep environment score*
 
+Data is stored 30 days in Adafruit IO (free-tier), allowing for historical analysis and trend monitoring.
+
 ### Discord Webhook for Notifications
 
 Discord webhook is used to send notifications from Adafruit IO to a Discord channel once per hour:
